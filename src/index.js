@@ -1,12 +1,5 @@
-import Vue from 'vue/dist/vue.esm.browser'
-import App from "./app.vue";
+import DatePicker from './DatePicker.svelte'
 
-new Vue({
-  el: "#app",
-  components: {
-    App
-  },
-  render(h) {
-    return h("App");
-  }
+const picker = new DatePicker({
+  target: document.querySelector("#app")
 });

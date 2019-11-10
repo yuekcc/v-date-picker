@@ -1,6 +1,6 @@
 import nodeResolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
-import vue from "rollup-plugin-vue";
+import svelte from "rollup-plugin-svelte";
 
 export default {
   input: "src/index.js",
@@ -10,5 +10,5 @@ export default {
     name: "VCal",
     sourceMap: true
   },
-  plugins: [nodeResolve(), commonjs(), vue({ css: true })]
+  plugins: [svelte(), nodeResolve(), commonjs()]
 };

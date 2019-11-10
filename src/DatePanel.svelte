@@ -1,5 +1,8 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   const WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"];
+
   const addDate = (d, factor) => {
     return new Date(
       d.getFullYear(),
@@ -10,7 +13,8 @@
       d.getSeconds()
     );
   };
-    const addMonth = (d, factor) => {
+
+  const addMonth = (d, factor) => {
     return new Date(
       d.getFullYear(),
       d.getMonth() + factor,
@@ -20,6 +24,7 @@
       d.getSeconds()
     );
   };
+
   const getFirstDateOfMonth = d => {
     return new Date(
       d.getFullYear(),
@@ -45,29 +50,31 @@
     for (let i = 0; i < 6; i++) {
       table.push(dates.slice(i * 7, i * 7 + 7));
     }
-    console.log(table);
+
     return table;
   };
 
-  export let value = new Date();
+  export let initialValue = new Date();
+  export let width = "300px";
+
+  let value = initialValue;
+  let dispatch = createEventDispatcher();
+
   $: firstDate = getFirstDateOfMonth(value);
   $: datesTable = createDatesTable(firstDate);
 
   $: selectDate = d => {
     console.log(JSON.stringify(d));
     value = d;
+    dispatch("change", d);
   };
 
   $: nextMonth = factor => {
-    value = addMonth(value, factor)
-  }
+    value = addMonth(value, factor);
+  };
 </script>
 
 <style>
-  .panel {
-    width: 300px;
-  }
-
   .row {
     display: flex;
   }
@@ -87,16 +94,22 @@
   }
 </style>
 
-<div class="panel">
+<div style="width: {width}">
   <div class="row row-between">
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(-12)}>⇤</a>
     </div>
-    <div class="cell label">←</div>
+    <div class="cell label">
+      <a href="javascript:" on:click|preventDefault={() => nextMonth(-1)}>←</a>
+    </div>
     <div class="cell label">{value.getFullYear()}</div>
     <div class="cell label">{value.getMonth() + 1}</div>
-    <div class="cell label">→</div>
-    <div class="cell label">⇥</div>
+    <div class="cell label">
+      <a href="javascript:" on:click|preventDefault={() => nextMonth(1)}>→</a>
+    </div>
+    <div class="cell label">
+      <a href="javascript:" on:click|preventDefault={() => nextMonth(12)}>⇥</a>
+    </div>
   </div>
   <div class="row">
     {#each WEEKDAYS as item}
