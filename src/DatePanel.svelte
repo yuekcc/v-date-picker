@@ -56,6 +56,7 @@
 
   export let initialValue = new Date();
   export let width = "300px";
+  export let zindex = "1200";
 
   let value = initialValue;
   let dispatch = createEventDispatcher();
@@ -64,7 +65,6 @@
   $: datesTable = createDatesTable(firstDate);
 
   $: selectDate = d => {
-    console.log(JSON.stringify(d));
     value = d;
     dispatch("change", d);
   };
@@ -75,6 +75,12 @@
 </script>
 
 <style>
+  .panel {
+    position: absolute;
+    left: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
   .row {
     display: flex;
   }
@@ -87,14 +93,17 @@
     flex: 1;
   }
 
+  .cell-initial {
+    flex: initial;
+  }
+
   .label {
     line-height: 2;
-    border: #c9c9c9 solid 1px;
     text-align: center;
   }
 </style>
 
-<div style="width: {width}">
+<div style="width: {width}; z-index: {zindex}" class="panel">
   <div class="row row-between">
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(-12)}>⇤</a>
@@ -102,8 +111,8 @@
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(-1)}>←</a>
     </div>
-    <div class="cell label">{value.getFullYear()}</div>
-    <div class="cell label">{value.getMonth() + 1}</div>
+    <div class="cell-initial label">{value.getFullYear()} 年</div>
+    <div class="cell-initial label">{value.getMonth() + 1} 月</div>
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(1)}>→</a>
     </div>

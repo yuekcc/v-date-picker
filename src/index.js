@@ -1,5 +1,2 @@
-import DatePicker from './DatePicker.svelte'
-
-const picker = new DatePicker({
-  target: document.querySelector("#app")
-});
+import DatePicker from "./DatePicker.svelte";
+export default { DatePicker };
