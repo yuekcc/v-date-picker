@@ -14,6 +14,11 @@
     );
   };
 
+  const eqDate = (a, b) =>
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate();
+
   const addMonth = (d, factor) => {
     return new Date(
       d.getFullYear(),
@@ -58,19 +63,20 @@
   export let width = "300px";
   export let zindex = "1200";
 
-  let value = initialValue;
+  let selectedDate = initialValue;
   let dispatch = createEventDispatcher();
 
-  $: firstDate = getFirstDateOfMonth(value);
-  $: datesTable = createDatesTable(firstDate);
+  let firstDate = getFirstDateOfMonth(selectedDate);
+  let datesTable = createDatesTable(firstDate);
 
-  $: selectDate = d => {
-    value = d;
+  const selectDate = d => {
+    selectedDate = d;
     dispatch("change", d);
   };
 
-  $: nextMonth = factor => {
-    value = addMonth(value, factor);
+  const nextMonth = factor => {
+    selectedDate = addMonth(selectedDate, factor);
+    datesTable = createDatesTable(selectedDate);
   };
 </script>
 
@@ -101,6 +107,10 @@
     line-height: 2;
     text-align: center;
   }
+
+  .current {
+    background-color: rgba(0, 140, 255, 0.315)
+  }
 </style>
 
 <div style="width: {width}; z-index: {zindex}" class="panel">
@@ -111,8 +121,8 @@
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(-1)}>←</a>
     </div>
-    <div class="cell-initial label">{value.getFullYear()} 年</div>
-    <div class="cell-initial label">{value.getMonth() + 1} 月</div>
+    <div class="cell-initial label">{selectedDate.getFullYear()} 年</div>
+    <div class="cell-initial label">{selectedDate.getMonth() + 1} 月</div>
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(1)}>→</a>
     </div>
@@ -128,7 +138,7 @@
   {#each datesTable as row}
     <div class="row">
       {#each row as date}
-        <div class="cell label">
+        <div class="cell label" class:current={eqDate(date, selectedDate)}>
           <a
             href="javascript:"
             on:click|preventDefault={() => selectDate(date)}>

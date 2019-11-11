@@ -109,6 +109,9 @@
     function set_style(node, key, value, important) {
         node.style.setProperty(key, value, important ? 'important' : '');
     }
+    function toggle_class(element, name, toggle) {
+        element.classList[toggle ? 'add' : 'remove'](name);
+    }
     function custom_event(type, detail) {
         const e = document.createEvent('CustomEvent');
         e.initCustomEvent(type, false, false, detail);
@@ -534,8 +537,8 @@
 
     function add_css() {
     	var style = element("style");
-    	style.id = 'svelte-10i830h-style';
-    	style.textContent = ".panel.svelte-10i830h{position:absolute;left:0;box-shadow:0 5px 10px rgba(0, 0, 0, 0.1)}.row.svelte-10i830h{display:flex}.row-between.svelte-10i830h{justify-content:space-between}.cell.svelte-10i830h{flex:1}.cell-initial.svelte-10i830h{flex:initial}.label.svelte-10i830h{line-height:2;text-align:center}";
+    	style.id = 'svelte-abdell-style';
+    	style.textContent = ".panel.svelte-abdell{position:absolute;left:0;box-shadow:0 5px 10px rgba(0, 0, 0, 0.1)}.row.svelte-abdell{display:flex}.row-between.svelte-abdell{justify-content:space-between}.cell.svelte-abdell{flex:1}.cell-initial.svelte-abdell{flex:initial}.label.svelte-abdell{line-height:2;text-align:center}.current.svelte-abdell{background-color:rgba(0, 140, 255, 0.315)\r\n  }";
     	append(document.head, style);
     }
 
@@ -557,7 +560,7 @@
     	return child_ctx;
     }
 
-    // (124:4) {#each WEEKDAYS as item}
+    // (134:4) {#each WEEKDAYS as item}
     function create_each_block_2(ctx) {
     	var div, t_value = ctx.item + "", t;
 
@@ -565,7 +568,7 @@
     		c() {
     			div = element("div");
     			t = text(t_value);
-    			attr(div, "class", "cell label svelte-10i830h");
+    			attr(div, "class", "cell label svelte-abdell");
     		},
 
     		m(target, anchor) {
@@ -583,7 +586,7 @@
     	};
     }
 
-    // (130:6) {#each row as date}
+    // (140:6) {#each row as date}
     function create_each_block_1(ctx) {
     	var div, a, t_value = ctx.date.getDate() + "", t, dispose;
 
@@ -597,7 +600,8 @@
     			a = element("a");
     			t = text(t_value);
     			attr(a, "href", "javascript:");
-    			attr(div, "class", "cell label svelte-10i830h");
+    			attr(div, "class", "cell label svelte-abdell");
+    			toggle_class(div, "current", ctx.eqDate(ctx.date, ctx.selectedDate));
     			dispose = listen(a, "click", prevent_default(click_handler_4));
     		},
 
@@ -612,6 +616,10 @@
     			if ((changed.datesTable) && t_value !== (t_value = ctx.date.getDate() + "")) {
     				set_data(t, t_value);
     			}
+
+    			if ((changed.eqDate || changed.datesTable || changed.selectedDate)) {
+    				toggle_class(div, "current", ctx.eqDate(ctx.date, ctx.selectedDate));
+    			}
     		},
 
     		d(detaching) {
@@ -624,7 +632,7 @@
     	};
     }
 
-    // (128:2) {#each datesTable as row}
+    // (138:2) {#each datesTable as row}
     function create_each_block(ctx) {
     	var div, t;
 
@@ -645,7 +653,7 @@
     			}
 
     			t = space();
-    			attr(div, "class", "row svelte-10i830h");
+    			attr(div, "class", "row svelte-abdell");
     		},
 
     		m(target, anchor) {
@@ -659,7 +667,7 @@
     		},
 
     		p(changed, ctx) {
-    			if (changed.datesTable) {
+    			if (changed.eqDate || changed.datesTable || changed.selectedDate) {
     				each_value_1 = ctx.row;
 
     				let i;
@@ -693,7 +701,7 @@
     }
 
     function create_fragment(ctx) {
-    	var div8, div6, div0, a0, t1, div1, a1, t3, div2, t4_value = ctx.value.getFullYear() + "", t4, t5, t6, div3, t7_value = ctx.value.getMonth() + 1 + "", t7, t8, t9, div4, a2, t11, div5, a3, t13, div7, t14, dispose;
+    	var div8, div6, div0, a0, t1, div1, a1, t3, div2, t4_value = ctx.selectedDate.getFullYear() + "", t4, t5, t6, div3, t7_value = ctx.selectedDate.getMonth() + 1 + "", t7, t8, t9, div4, a2, t11, div5, a3, t13, div7, t14, dispose;
 
     	let each_value_2 = ctx.WEEKDAYS;
 
@@ -751,20 +759,20 @@
     				each_blocks[i].c();
     			}
     			attr(a0, "href", "javascript:");
-    			attr(div0, "class", "cell label svelte-10i830h");
+    			attr(div0, "class", "cell label svelte-abdell");
     			attr(a1, "href", "javascript:");
-    			attr(div1, "class", "cell label svelte-10i830h");
-    			attr(div2, "class", "cell-initial label svelte-10i830h");
-    			attr(div3, "class", "cell-initial label svelte-10i830h");
+    			attr(div1, "class", "cell label svelte-abdell");
+    			attr(div2, "class", "cell-initial label svelte-abdell");
+    			attr(div3, "class", "cell-initial label svelte-abdell");
     			attr(a2, "href", "javascript:");
-    			attr(div4, "class", "cell label svelte-10i830h");
+    			attr(div4, "class", "cell label svelte-abdell");
     			attr(a3, "href", "javascript:");
-    			attr(div5, "class", "cell label svelte-10i830h");
-    			attr(div6, "class", "row row-between svelte-10i830h");
-    			attr(div7, "class", "row svelte-10i830h");
+    			attr(div5, "class", "cell label svelte-abdell");
+    			attr(div6, "class", "row row-between svelte-abdell");
+    			attr(div7, "class", "row svelte-abdell");
     			set_style(div8, "width", ctx.width);
     			set_style(div8, "z-index", ctx.zindex);
-    			attr(div8, "class", "panel svelte-10i830h");
+    			attr(div8, "class", "panel svelte-abdell");
 
     			dispose = [
     				listen(a0, "click", prevent_default(ctx.click_handler)),
@@ -811,11 +819,11 @@
     		},
 
     		p(changed, ctx) {
-    			if ((changed.value) && t4_value !== (t4_value = ctx.value.getFullYear() + "")) {
+    			if ((changed.selectedDate) && t4_value !== (t4_value = ctx.selectedDate.getFullYear() + "")) {
     				set_data(t4, t4_value);
     			}
 
-    			if ((changed.value) && t7_value !== (t7_value = ctx.value.getMonth() + 1 + "")) {
+    			if ((changed.selectedDate) && t7_value !== (t7_value = ctx.selectedDate.getMonth() + 1 + "")) {
     				set_data(t7, t7_value);
     			}
 
@@ -841,7 +849,7 @@
     				each_blocks_1.length = each_value_2.length;
     			}
 
-    			if (changed.datesTable) {
+    			if (changed.datesTable || changed.eqDate || changed.selectedDate) {
     				each_value = ctx.datesTable;
 
     				let i;
@@ -903,6 +911,11 @@
         );
       };
 
+      const eqDate = (a, b) =>
+        a.getFullYear() === b.getFullYear() &&
+        a.getMonth() === b.getMonth() &&
+        a.getDate() === b.getDate();
+
       const addMonth = (d, factor) => {
         return new Date(
           d.getFullYear(),
@@ -945,8 +958,21 @@
 
       let { initialValue = new Date(), width = "300px", zindex = "1200" } = $$props;
 
-      let value = initialValue;
+      let selectedDate = initialValue;
       let dispatch = createEventDispatcher();
+
+      let firstDate = getFirstDateOfMonth(selectedDate);
+      let datesTable = createDatesTable(firstDate);
+
+      const selectDate = d => {
+        $$invalidate('selectedDate', selectedDate = d);
+        dispatch("change", d);
+      };
+
+      const nextMonth = factor => {
+        $$invalidate('selectedDate', selectedDate = addMonth(selectedDate, factor));
+        $$invalidate('datesTable', datesTable = createDatesTable(selectedDate));
+      };
 
     	const click_handler = () => nextMonth(-12);
 
@@ -964,26 +990,13 @@
     		if ('zindex' in $$props) $$invalidate('zindex', zindex = $$props.zindex);
     	};
 
-    	let firstDate, datesTable, selectDate, nextMonth;
-
-    	$$self.$$.update = ($$dirty = { dispatch: 1, value: 1, firstDate: 1 }) => {
-    		if ($$dirty.dispatch) { $$invalidate('selectDate', selectDate = d => {
-            $$invalidate('value', value = d);
-            dispatch("change", d);
-          }); }
-    		if ($$dirty.value) { $$invalidate('nextMonth', nextMonth = factor => {
-            $$invalidate('value', value = addMonth(value, factor));
-          }); }
-    		if ($$dirty.value) { $$invalidate('firstDate', firstDate = getFirstDateOfMonth(value)); }
-    		if ($$dirty.firstDate) { $$invalidate('datesTable', datesTable = createDatesTable(firstDate)); }
-    	};
-
     	return {
     		WEEKDAYS,
+    		eqDate,
     		initialValue,
     		width,
     		zindex,
-    		value,
+    		selectedDate,
     		datesTable,
     		selectDate,
     		nextMonth,
@@ -998,7 +1011,7 @@
     class DatePanel extends SvelteComponent {
     	constructor(options) {
     		super();
-    		if (!document.getElementById("svelte-10i830h-style")) add_css();
+    		if (!document.getElementById("svelte-abdell-style")) add_css();
     		init(this, options, instance, create_fragment, safe_not_equal, ["initialValue", "width", "zindex"]);
     	}
     }
