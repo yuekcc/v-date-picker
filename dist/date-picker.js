@@ -537,8 +537,8 @@
 
     function add_css() {
     	var style = element("style");
-    	style.id = 'svelte-abdell-style';
-    	style.textContent = ".panel.svelte-abdell{position:absolute;left:0;box-shadow:0 5px 10px rgba(0, 0, 0, 0.1)}.row.svelte-abdell{display:flex}.row-between.svelte-abdell{justify-content:space-between}.cell.svelte-abdell{flex:1}.cell-initial.svelte-abdell{flex:initial}.label.svelte-abdell{line-height:2;text-align:center}.current.svelte-abdell{background-color:rgba(0, 140, 255, 0.315)\r\n  }";
+    	style.id = 'svelte-e9yd02-style';
+    	style.textContent = ".panel.svelte-e9yd02{position:absolute;left:0;box-shadow:0 5px 10px rgba(0, 0, 0, 0.1)}.row.svelte-e9yd02{display:flex}.row-between.svelte-e9yd02{justify-content:space-between}.cell.svelte-e9yd02{flex:1}.cell-initial.svelte-e9yd02{flex:initial}.label.svelte-e9yd02{line-height:2;text-align:center}.current.svelte-e9yd02{background-color:rgba(0, 140, 255, 0.315)}";
     	append(document.head, style);
     }
 
@@ -568,7 +568,7 @@
     		c() {
     			div = element("div");
     			t = text(t_value);
-    			attr(div, "class", "cell label svelte-abdell");
+    			attr(div, "class", "cell label svelte-e9yd02");
     		},
 
     		m(target, anchor) {
@@ -600,7 +600,7 @@
     			a = element("a");
     			t = text(t_value);
     			attr(a, "href", "javascript:");
-    			attr(div, "class", "cell label svelte-abdell");
+    			attr(div, "class", "cell label svelte-e9yd02");
     			toggle_class(div, "current", ctx.eqDate(ctx.date, ctx.selectedDate));
     			dispose = listen(a, "click", prevent_default(click_handler_4));
     		},
@@ -653,7 +653,7 @@
     			}
 
     			t = space();
-    			attr(div, "class", "row svelte-abdell");
+    			attr(div, "class", "row svelte-e9yd02");
     		},
 
     		m(target, anchor) {
@@ -701,7 +701,7 @@
     }
 
     function create_fragment(ctx) {
-    	var div8, div6, div0, a0, t1, div1, a1, t3, div2, t4_value = ctx.selectedDate.getFullYear() + "", t4, t5, t6, div3, t7_value = ctx.selectedDate.getMonth() + 1 + "", t7, t8, t9, div4, a2, t11, div5, a3, t13, div7, t14, dispose;
+    	var div8, div6, div0, a0, t1, div1, a1, t3, div2, t4_value = ctx.selectedDate.getFullYear() + "", t4, t5, t6, div3, t7, t8_value = ctx.selectedDate.getMonth() + 1 + "", t8, t9, t10, div4, a2, t12, div5, a3, t14, div7, t15, dispose;
 
     	let each_value_2 = ctx.WEEKDAYS;
 
@@ -733,46 +733,47 @@
     			t3 = space();
     			div2 = element("div");
     			t4 = text(t4_value);
-    			t5 = text(" 年");
+    			t5 = text(" 年");
     			t6 = space();
     			div3 = element("div");
-    			t7 = text(t7_value);
-    			t8 = text(" 月");
-    			t9 = space();
+    			t7 = text(" ");
+    			t8 = text(t8_value);
+    			t9 = text(" 月");
+    			t10 = space();
     			div4 = element("div");
     			a2 = element("a");
     			a2.textContent = "→";
-    			t11 = space();
+    			t12 = space();
     			div5 = element("div");
     			a3 = element("a");
     			a3.textContent = "⇥";
-    			t13 = space();
+    			t14 = space();
     			div7 = element("div");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t14 = space();
+    			t15 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
     			attr(a0, "href", "javascript:");
-    			attr(div0, "class", "cell label svelte-abdell");
+    			attr(div0, "class", "cell label svelte-e9yd02");
     			attr(a1, "href", "javascript:");
-    			attr(div1, "class", "cell label svelte-abdell");
-    			attr(div2, "class", "cell-initial label svelte-abdell");
-    			attr(div3, "class", "cell-initial label svelte-abdell");
+    			attr(div1, "class", "cell label svelte-e9yd02");
+    			attr(div2, "class", "cell-initial label svelte-e9yd02");
+    			attr(div3, "class", "cell-initial label svelte-e9yd02");
     			attr(a2, "href", "javascript:");
-    			attr(div4, "class", "cell label svelte-abdell");
+    			attr(div4, "class", "cell label svelte-e9yd02");
     			attr(a3, "href", "javascript:");
-    			attr(div5, "class", "cell label svelte-abdell");
-    			attr(div6, "class", "row row-between svelte-abdell");
-    			attr(div7, "class", "row svelte-abdell");
+    			attr(div5, "class", "cell label svelte-e9yd02");
+    			attr(div6, "class", "row row-between svelte-e9yd02");
+    			attr(div7, "class", "row svelte-e9yd02");
     			set_style(div8, "width", ctx.width);
     			set_style(div8, "z-index", ctx.zindex);
-    			attr(div8, "class", "panel svelte-abdell");
+    			attr(div8, "class", "panel svelte-e9yd02");
 
     			dispose = [
     				listen(a0, "click", prevent_default(ctx.click_handler)),
@@ -798,20 +799,21 @@
     			append(div6, div3);
     			append(div3, t7);
     			append(div3, t8);
-    			append(div6, t9);
+    			append(div3, t9);
+    			append(div6, t10);
     			append(div6, div4);
     			append(div4, a2);
-    			append(div6, t11);
+    			append(div6, t12);
     			append(div6, div5);
     			append(div5, a3);
-    			append(div8, t13);
+    			append(div8, t14);
     			append(div8, div7);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].m(div7, null);
     			}
 
-    			append(div8, t14);
+    			append(div8, t15);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div8, null);
@@ -823,8 +825,8 @@
     				set_data(t4, t4_value);
     			}
 
-    			if ((changed.selectedDate) && t7_value !== (t7_value = ctx.selectedDate.getMonth() + 1 + "")) {
-    				set_data(t7, t7_value);
+    			if ((changed.selectedDate) && t8_value !== (t8_value = ctx.selectedDate.getMonth() + 1 + "")) {
+    				set_data(t8, t8_value);
     			}
 
     			if (changed.WEEKDAYS) {
@@ -971,7 +973,7 @@
 
       const nextMonth = factor => {
         $$invalidate('selectedDate', selectedDate = addMonth(selectedDate, factor));
-        $$invalidate('datesTable', datesTable = createDatesTable(selectedDate));
+        $$invalidate('datesTable', datesTable = createDatesTable(getFirstDateOfMonth(selectedDate)));
       };
 
     	const click_handler = () => nextMonth(-12);
@@ -1011,7 +1013,7 @@
     class DatePanel extends SvelteComponent {
     	constructor(options) {
     		super();
-    		if (!document.getElementById("svelte-abdell-style")) add_css();
+    		if (!document.getElementById("svelte-e9yd02-style")) add_css();
     		init(this, options, instance, create_fragment, safe_not_equal, ["initialValue", "width", "zindex"]);
     	}
     }

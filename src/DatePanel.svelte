@@ -76,7 +76,7 @@
 
   const nextMonth = factor => {
     selectedDate = addMonth(selectedDate, factor);
-    datesTable = createDatesTable(selectedDate);
+    datesTable = createDatesTable(getFirstDateOfMonth(selectedDate));
   };
 </script>
 
@@ -109,7 +109,7 @@
   }
 
   .current {
-    background-color: rgba(0, 140, 255, 0.315)
+    background-color: rgba(0, 140, 255, 0.315);
   }
 </style>
 
@@ -121,8 +121,8 @@
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(-1)}>←</a>
     </div>
-    <div class="cell-initial label">{selectedDate.getFullYear()} 年</div>
-    <div class="cell-initial label">{selectedDate.getMonth() + 1} 月</div>
+    <div class="cell-initial label">{selectedDate.getFullYear()}&nbsp;年</div>
+    <div class="cell-initial label">&nbsp;{selectedDate.getMonth() + 1}&nbsp;月</div>
     <div class="cell label">
       <a href="javascript:" on:click|preventDefault={() => nextMonth(1)}>→</a>
     </div>
@@ -138,7 +138,9 @@
   {#each datesTable as row}
     <div class="row">
       {#each row as date}
-        <div class="cell label" class:current={eqDate(date, selectedDate)}>
+        <div
+          class="cell label"
+          class:current={eqDate(date, selectedDate)}>
           <a
             href="javascript:"
             on:click|preventDefault={() => selectDate(date)}>
